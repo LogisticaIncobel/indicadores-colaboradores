@@ -55,3 +55,17 @@ button:hover {
   margin-top: 20px;
   font-size: 16px;
 }
+
+.painel {
+  background: #f2f8ff;
+  border: 1px solid #cce0ff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.painel p {
+  font-size: 16px;
+  margin: 8px 0;
+}
