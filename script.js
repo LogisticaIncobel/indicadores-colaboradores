@@ -1,4 +1,5 @@
 async function verificarCodigo() {
+  // Entrada limpa do usuário (remove espaços e vírgulas)
   const entrada = document.getElementById("codigoInput").value.trim().replace(/[^0-9A-Za-z]/g, "");
   const resultadoDiv = document.getElementById("resultado");
 
@@ -14,7 +15,8 @@ async function verificarCodigo() {
     const linhas = csv.trim().split("\n").slice(1);
 
     for (let linha of linhas) {
-      const [cod, nome, status] = linha.split(",").map(item => item.trim().replace(/[^0-9A-Za-z]/g, ""));
+      // Lê e limpa os dados do CSV, tratando tudo como string
+      const [cod, nome, status] = linha.split(",").map(item => item.trim().toString().replace(/[^0-9A-Za-z]/g, ""));
 
       if (cod === entrada) {
         resultadoDiv.innerHTML = `
