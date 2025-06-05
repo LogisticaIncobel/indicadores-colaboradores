@@ -6,11 +6,15 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #004aad;
+  background-color: #004aad; /* fundo azul institucional */
   font-family: 'Segoe UI', sans-serif;
+}
+
+body {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
 
 .container {
