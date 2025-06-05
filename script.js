@@ -11,10 +11,10 @@ async function verificarCodigo() {
     const response = await fetch("dados.csv");
     const csv = await response.text();
 
-    const linhas = csv.trim().split("\n").slice(1); // Ignora cabeçalho
+    const linhas = csv.trim().split("\n").slice(1);
 
     for (let linha of linhas) {
-      const [cod, nome, status] = linha.split(",");
+      const [cod, nome, status] = linha.split(",").map(item => item.trim());
 
       if (cod === codigo) {
         resultadoDiv.innerHTML = `
