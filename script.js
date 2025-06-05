@@ -1,10 +1,9 @@
 async function verificarCodigo() {
-  // Entrada limpa do usuário (remove espaços e vírgulas)
   const entrada = document.getElementById("codigoInput").value.trim().replace(/[^0-9A-Za-z]/g, "");
-  const resultadoDiv = document.getElementById("resultado");
+  const container = document.querySelector(".container");
 
   if (!entrada) {
-    resultadoDiv.innerHTML = "<p style='color:red'>Digite um código válido.</p>";
+    document.getElementById("resultado").innerHTML = "<p style='color:red'>Digite um código válido.</p>";
     return;
   }
 
@@ -15,22 +14,24 @@ async function verificarCodigo() {
     const linhas = csv.trim().split("\n").slice(1);
 
     for (let linha of linhas) {
-      // Lê e limpa os dados do CSV, tratando tudo como string
-      const [cod, nome, status] = linha.split(",").map(item => item.trim().toString().replace(/[^0-9A-Za-z]/g, ""));
+      const [cod, nome, dispersao] = linha.split(",").map(item => item.trim().toString().replace(/[^0-9A-Za-zÀ-ÿ ,]/g, ""));
 
       if (cod === entrada) {
-        resultadoDiv.innerHTML = `
-          <h2>Bem-vindo!</h2>
-          <p><strong>Código:</strong> ${cod}</p>
-          <p><strong>Nome:</strong> ${nome}</p>
-          <p><strong>Status:</strong> ${status}</p>
+        container.innerHTML = `
+          <img src="logo.png" alt="Logo Incobel" class="logo" style="max-width: 240px; margin-bottom: 20px;">
+          <h2 style="color: #004aad; margin-bottom: 30px;">Bem-vindo, ${nome.split(" ")[0]}!</h2>
+          <div class="painel">
+            <p><strong>Código:</strong> ${cod}</p>
+            <p><strong>Nome completo:</strong> ${nome}</p>
+            <p><strong>Dispersão KM:</strong> ${dispersao}</p>
+          </div>
         `;
         return;
       }
     }
 
-    resultadoDiv.innerHTML = "<p style='color:red'>Código não encontrado.</p>";
+    document.getElementById("resultado").innerHTML = "<p style='color:red'>Código não encontrado.</p>";
   } catch (error) {
-    resultadoDiv.innerHTML = "<p style='color:red'>Erro ao acessar o banco de dados.</p>";
+    document.getElementById("resultado").innerHTML = "<p style='color:red'>Erro ao acessar o banco de dados.</p>";
   }
 }
