@@ -6,7 +6,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #004aad; /* Fundo azul externo */
+  background: linear-gradient(to bottom, #ffffff, #eaf0fb); /* fundo institucional leve */
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: center;
@@ -18,7 +18,7 @@ html, body {
   padding: 40px;
   border-radius: 12px;
   width: 100%;
-  max-width: 600px; /* ← Mais largo para desktop */
+  max-width: 600px;
   box-shadow: 0 0 15px rgba(0,0,0,0.15);
   text-align: center;
 }
