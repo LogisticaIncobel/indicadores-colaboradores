@@ -1,8 +1,8 @@
 async function verificarCodigo() {
-  const codigo = document.getElementById("codigoInput").value.trim();
+  const entrada = document.getElementById("codigoInput").value.trim().replace(/[^0-9A-Za-z]/g, "");
   const resultadoDiv = document.getElementById("resultado");
 
-  if (!codigo) {
+  if (!entrada) {
     resultadoDiv.innerHTML = "<p style='color:red'>Digite um código válido.</p>";
     return;
   }
@@ -14,9 +14,9 @@ async function verificarCodigo() {
     const linhas = csv.trim().split("\n").slice(1);
 
     for (let linha of linhas) {
-      const [cod, nome, status] = linha.split(",").map(item => item.trim());
+      const [cod, nome, status] = linha.split(",").map(item => item.trim().replace(/[^0-9A-Za-z]/g, ""));
 
-      if (cod === codigo) {
+      if (cod === entrada) {
         resultadoDiv.innerHTML = `
           <h2>Bem-vindo!</h2>
           <p><strong>Código:</strong> ${cod}</p>
