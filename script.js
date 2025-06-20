@@ -1,8 +1,13 @@
 function formatarValor(valor) {
   if (!valor || valor.trim() === "--") return "--";
-  let num = parseFloat(valor.replace(",", "."));
+
+  // Extrai apenas números (inclusive vírgulas e pontos) do valor
+  let limpo = valor.replace(/[^\d,.-]/g, "").replace(",", ".");
+  let num = parseFloat(limpo);
+
   if (isNaN(num)) return "--";
   if (num <= 1) num *= 100;
+
   return `${num.toFixed(2).replace(".", ",")}%`;
 }
 
