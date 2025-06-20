@@ -1,4 +1,3 @@
-// Máscara automática de CPF enquanto digita
 document.getElementById("codigoInput").addEventListener("input", function (e) {
   let value = e.target.value.replace(/\D/g, "");
   if (value.length > 11) value = value.slice(0, 11);
@@ -42,23 +41,27 @@ async function verificarCodigo() {
       if (cpfLimpo === entrada) {
         const bloco = (titulo, meta, real) => `
           <div class="bloco">
-            <div class="titulo">${titulo}</div>
-            <div class="tabela">
-              <div class="linha cabecalho">
-                <div>Meta</div>
-                <div>Real</div>
-              </div>
-              <div class="linha dados">
-                <div>${formatarValor(meta)}</div>
-                <div>${formatarValor(real)}</div>
-              </div>
-            </div>
+            <div class="bloco-titulo">${titulo}</div>
+            <table class="bloco-tabela">
+              <thead>
+                <tr>
+                  <th>Meta</th>
+                  <th>Real</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>${formatarValor(meta)}</td>
+                  <td>${formatarValor(real)}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>`;
 
         container.innerHTML = `
-          <img src="logo.png" alt="Logo Incobel" class="logo" style="max-width: 240px; margin-bottom: 20px;">
-          <h2 style="color: #004aad; margin-bottom: 10px;"><strong>Nome Completo:</strong> ${nome}</h2>
-          <h3 style="margin-bottom: 20px;"><strong>CPF:</strong> ${cpfBruto}</h3>
+          <img src="logo.png" alt="Logo Incobel" class="logo" style="max-width: 200px; margin-bottom: 10px;">
+          <h2 style="color: #004aad;"><strong>Nome Completo:</strong> ${nome}</h2>
+          <h3 style="margin-bottom: 30px;"><strong>CPF:</strong> ${cpfBruto}</h3>
 
           ${bloco("Devolução por PDV", metaPdv, realPdv)}
           ${bloco("Devolução por HECTOLITRO", metaHecto, realHecto)}
