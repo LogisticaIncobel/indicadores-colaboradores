@@ -24,19 +24,17 @@ async function verificarCodigo() {
 
     for (let linha of linhas) {
       const partes = linha.split(",");
-
       const cpfBruto = partes[0]?.trim();
       const nome = partes[1]?.trim();
 
-      // AQUI ESTÃO AS VARIÁVEIS CORRETAS
-      const metaPdv = partes[2]?.trim() || "--";
-      const realPdv = partes[3]?.trim() || "--";
-      const metaHecto = partes[4]?.trim() || "--";
-      const realHecto = partes[5]?.trim() || "--";
-      const metaTracking = partes[6]?.trim() || "--";
-      const realTracking = partes[7]?.trim() || "--";
-      const metaDisp = partes[8]?.trim() || "--";
-      const realDisp = partes[9]?.trim() || "--";
+      const metaPdv = partes[2]?.trim();
+      const realPdv = partes[3]?.trim();
+      const metaHecto = partes[4]?.trim();
+      const realHecto = partes[5]?.trim();
+      const metaTracking = partes[6]?.trim();
+      const realTracking = partes[7]?.trim();
+      const metaDisp = partes[8]?.trim();
+      const realDisp = partes[9]?.trim();
 
       const cpfLimpo = cpfBruto.replace(/\D/g, "");
 
@@ -57,12 +55,11 @@ async function verificarCodigo() {
           </div>`;
 
         container.innerHTML = `
-          <img src="logo.png" alt="Logo Incobel" class="logo" style="max-width: 200px; margin-bottom: 20px;">
+          <img src="logo.png" alt="Logo Incobel" class="logo">
           <div class="dados-pessoais">
-            <p><strong style="color: black;">Nome Completo:</strong> <span style="color: black; font-weight: normal;">${nome}</span></p>
-            <p><strong style="color: black;">CPF:</strong> <span style="color: black; font-weight: normal;">${cpfBruto}</span></p>
+            <p><strong style="color:black;">Nome Completo:</strong> <span style="color:black;font-weight:normal">${nome}</span></p>
+            <p><strong style="color:black;">CPF:</strong> <span style="color:black;font-weight:normal">${cpfBruto}</span></p>
           </div>
-
           ${bloco("Devolução por PDV", metaPdv, realPdv)}
           ${bloco("Devolução por HECTOLITRO", metaHecto, realHecto)}
           ${bloco("Aderência ao TRACKING", metaTracking, realTracking)}
@@ -79,13 +76,9 @@ async function verificarCodigo() {
 }
 
 function formatarValor(valor) {
-  if (valor === "--" || valor === "") return "--";
-  try {
-    let num = parseFloat(valor.replace(",", "."));
-    if (isNaN(num)) return "--";
-    if (num > 1) return `${num.toFixed(2).replace(".", ",")}%`;
-    return `${(num * 100).toFixed(2).replace(".", ",")}%`;
-  } catch {
-    return "--";
-  }
+  if (!valor || valor === "--") return "--";
+  let num = parseFloat(valor.replace(",", "."));
+  if (isNaN(num)) return "--";
+  if (num <= 1) num *= 100;
+  return `${num.toFixed(2).replace(".", ",")}%`;
 }
