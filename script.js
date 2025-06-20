@@ -6,8 +6,17 @@ function formatarValor(valor) {
   return `${num.toFixed(2).replace(".", ",")}%`;
 }
 
+function aplicarMascaraCPF(input) {
+  let valor = input.value.replace(/\D/g, "").slice(0, 11);
+  if (valor.length >= 4) valor = valor.replace(/^(\d{3})(\d)/, "$1.$2");
+  if (valor.length >= 7) valor = valor.replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3");
+  if (valor.length >= 11) valor = valor.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+  input.value = valor;
+}
+
 async function verificarCodigo() {
-  const entrada = document.getElementById("codigoInput").value.replace(/\D/g, "");
+  const input = document.getElementById("codigoInput");
+  const entrada = input.value.replace(/\D/g, "");
 
   if (entrada.length !== 11) {
     document.getElementById("resultado").innerHTML = "<p style='color:red'>Digite um CPF válido.</p>";
@@ -20,7 +29,7 @@ async function verificarCodigo() {
     const linhas = csv.trim().split("\n").slice(1);
 
     for (let linha of linhas) {
-      const partes = linha.split(";"); // <- AGORA COM ; COMO DELIMITADOR
+      const partes = linha.split(";"); // CSV separado por ponto e vírgula
       const cpf = partes[0]?.replace(/\D/g, "");
       const nome = partes[1]?.trim();
 
@@ -69,3 +78,9 @@ async function verificarCodigo() {
     document.getElementById("resultado").innerHTML = "<p style='color:red'>Erro ao acessar dados.</p>";
   }
 }
+
+// Aplica a máscara automaticamente ao digitar
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("codigoInput");
+  input.addEventListener("input", () => aplicarMascaraCPF(input));
+});
