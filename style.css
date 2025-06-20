@@ -6,7 +6,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: linear-gradient(to bottom, #ffffff, #eaf0fb);
+  background: #f4f7fa;
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: center;
@@ -16,16 +16,16 @@ html, body {
 .container {
   background: white;
   padding: 40px;
-  border-radius: 12px;
+  border-radius: 16px;
   width: 100%;
   max-width: 600px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
 .logo {
   width: 100%;
-  max-width: 240px;
+  max-width: 200px;
   margin-bottom: 20px;
 }
 
@@ -61,34 +61,57 @@ button:hover {
   font-size: 16px;
 }
 
-/* Blocos formatados institucionalmente */
+.dados-pessoais {
+  margin: 30px 0 20px;
+  text-align: center;
+}
+
+.dados-pessoais p {
+  margin: 6px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+}
+
+.valor-texto {
+  font-weight: normal;
+  color: #000;
+}
+
 .bloco {
   margin-bottom: 25px;
 }
 
-.bloco-titulo {
-  background: #333;
+.titulo-indicador {
+  background: #004aad;
   color: white;
   font-weight: bold;
-  padding: 8px;
-  font-size: 15px;
-  border-radius: 4px 4px 0 0;
-}
-
-.bloco-tabela {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 15px;
-}
-
-.bloco-tabela thead th {
-  background: #cce0ff;
-  color: #000;
+  font-size: 14px;
   padding: 10px;
+  border-radius: 6px 6px 0 0;
 }
 
-.bloco-tabela tbody td {
+.tabela-bloco {
+  display: flex;
+  justify-content: center;
   background: #eaf3ff;
-  padding: 10px;
+  border: 1px solid #d4e4fb;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+}
+
+.coluna-bloco {
+  flex: 1;
   text-align: center;
+  padding: 10px 0;
+}
+
+.cabecalho-bloco {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.valor-bloco {
+  font-size: 16px;
 }
