@@ -80,5 +80,9 @@ function formatarValor(valor) {
   if (valor === "--" || valor === "") return "--";
   const num = parseFloat(valor.replace(",", "."));
   if (isNaN(num)) return "--";
-  return (num * 100).toFixed(2).replace(".", ",") + "%";
+
+  // VALOR CORRETO: se já for entre 0 e 1, é decimal, multiplica por 100
+  const percentual = num <= 1 ? num * 100 : num;
+
+  return percentual.toFixed(2).replace(".", ",") + "%";
 }
