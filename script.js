@@ -27,6 +27,8 @@ async function verificarCodigo() {
 
       const cpfBruto = partes[0]?.trim();
       const nome = partes[1]?.trim();
+
+      // AQUI ESTÃO AS VARIÁVEIS CORRETAS
       const metaPdv = partes[2]?.trim() || "--";
       const realPdv = partes[3]?.trim() || "--";
       const metaHecto = partes[4]?.trim() || "--";
@@ -57,8 +59,8 @@ async function verificarCodigo() {
         container.innerHTML = `
           <img src="logo.png" alt="Logo Incobel" class="logo" style="max-width: 200px; margin-bottom: 20px;">
           <div class="dados-pessoais">
-            <p><strong style="color: black;">Nome Completo:</strong> <span class="valor-texto" style="color: black; font-weight: normal;">${nome}</span></p>
-            <p><strong style="color: black;">CPF:</strong> <span class="valor-texto" style="color: black; font-weight: normal;">${cpfBruto}</span></p>
+            <p><strong style="color: black;">Nome Completo:</strong> <span style="color: black; font-weight: normal;">${nome}</span></p>
+            <p><strong style="color: black;">CPF:</strong> <span style="color: black; font-weight: normal;">${cpfBruto}</span></p>
           </div>
 
           ${bloco("Devolução por PDV", metaPdv, realPdv)}
@@ -78,11 +80,12 @@ async function verificarCodigo() {
 
 function formatarValor(valor) {
   if (valor === "--" || valor === "") return "--";
-  const num = parseFloat(valor.replace(",", "."));
-  if (isNaN(num)) return "--";
-
-  // VALOR CORRETO: se já for entre 0 e 1, é decimal, multiplica por 100
-  const percentual = num <= 1 ? num * 100 : num;
-
-  return percentual.toFixed(2).replace(".", ",") + "%";
+  try {
+    let num = parseFloat(valor.replace(",", "."));
+    if (isNaN(num)) return "--";
+    if (num > 1) return `${num.toFixed(2).replace(".", ",")}%`;
+    return `${(num * 100).toFixed(2).replace(".", ",")}%`;
+  } catch {
+    return "--";
+  }
 }
