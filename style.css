@@ -2,38 +2,41 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #ffffff, #eaf0fb);
+  height: 100%;
+  background: #f4f7fa;
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .container {
   background: white;
   padding: 40px;
-  border-radius: 12px;
-  max-width: 600px;
+  border-radius: 16px;
   width: 100%;
-  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+  max-width: 600px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
 .logo {
+  width: 100%;
   max-width: 200px;
   margin-bottom: 20px;
 }
 
-input, button {
+input,
+button {
   width: 100%;
   padding: 14px;
-  margin: 10px 0;
+  margin: 12px 0;
   border-radius: 6px;
   font-size: 16px;
+  display: block;
 }
 
 input {
@@ -46,48 +49,67 @@ button {
   border: none;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 button:hover {
   background: #00337a;
 }
 
-.dados-pessoais {
+#resultado {
   margin-top: 20px;
-  text-align: left;
+  font-size: 16px;
+}
+
+.dados-pessoais {
+  margin: 30px 0 20px;
+  text-align: center;
+}
+
+.dados-pessoais p {
+  margin: 6px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+}
+
+.valor-texto {
+  font-weight: normal;
+  color: #000;
 }
 
 .bloco {
-  background: #f2f8ff;
-  border-radius: 8px;
-  margin-top: 20px;
-  padding-bottom: 10px;
-  box-shadow: 0 0 3px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
 }
 
 .titulo-indicador {
   background: #004aad;
   color: white;
   font-weight: bold;
-  padding: 8px;
-  border-radius: 8px 8px 0 0;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 6px 6px 0 0;
 }
 
 .tabela-bloco {
   display: flex;
-  justify-content: space-around;
-  padding: 10px;
-  background: #eef5ff;
+  justify-content: center;
+  background: #eaf3ff;
+  border: 1px solid #d4e4fb;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
 }
 
 .coluna-bloco {
-  text-align: center;
   flex: 1;
+  text-align: center;
+  padding: 10px 0;
 }
 
 .cabecalho-bloco {
   font-weight: bold;
-  margin-bottom: 5px;
+  font-size: 14px;
+  margin-bottom: 6px;
 }
 
 .valor-bloco {
