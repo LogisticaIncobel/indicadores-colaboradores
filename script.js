@@ -80,5 +80,5 @@ function formatarValor(valor) {
   if (valor === "--" || valor === "") return "--";
   const num = parseFloat(valor);
   if (isNaN(num)) return valor;
-  return (num * 100).toFixed(2).replace(".", ",") + "%";
+  return num.toFixed(2).replace(".", ",") + "%";
 }
