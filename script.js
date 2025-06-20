@@ -1,4 +1,4 @@
-// Máscara automática de CPF
+// Máscara automática de CPF enquanto digita
 document.getElementById("codigoInput").addEventListener("input", function (e) {
   let value = e.target.value.replace(/\D/g, "");
   if (value.length > 11) value = value.slice(0, 11);
@@ -21,17 +21,17 @@ async function verificarCodigo() {
   try {
     const response = await fetch("dados.csv");
     const csv = await response.text();
-    const linhas = csv.trim().split("\n").slice(1); // Remove cabeçalho
+    const linhas = csv.trim().split("\n").slice(1);
 
     for (let linha of linhas) {
       const partes = linha.split(",");
 
       const cpfBruto = partes[0]?.trim();
       const nome = partes[1]?.trim();
-      const metaPdv = parseFloat(partes[2]) || "--";
-      const realPdv = parseFloat(partes[3]) || "--";
-      const metaHecto = parseFloat(partes[4]) || "--";
-      const realHecto = parseFloat(partes[5]) || "--";
+      const metaPdv = partes[2]?.trim() || "--";
+      const realPdv = partes[3]?.trim() || "--";
+      const metaHecto = partes[4]?.trim() || "--";
+      const realHecto = partes[5]?.trim() || "--";
       const metaTracking = partes[6]?.trim() || "--";
       const realTracking = partes[7]?.trim() || "--";
       const metaDisp = partes[8]?.trim() || "--";
@@ -75,9 +75,8 @@ async function verificarCodigo() {
   }
 }
 
-// Formata número como percentual, se aplicável
 function formatarValor(valor) {
-  if (valor === "--") return "--";
+  if (valor === "--" || valor === "") return "--";
   const num = parseFloat(valor);
   if (isNaN(num)) return valor;
   return (num * 100).toFixed(2).replace(".", ",") + "%";
