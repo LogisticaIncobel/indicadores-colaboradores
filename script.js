@@ -57,8 +57,8 @@ async function verificarCodigo() {
         container.innerHTML = `
           <img src="logo.png" alt="Logo Incobel" class="logo" style="max-width: 200px; margin-bottom: 20px;">
           <div class="dados-pessoais">
-            <p><strong>Nome Completo:</strong> <span class="valor-texto">${nome}</span></p>
-            <p><strong>CPF:</strong> <span class="valor-texto">${cpfBruto}</span></p>
+            <p><strong style="color: black;">Nome Completo:</strong> <span class="valor-texto" style="color: black; font-weight: normal;">${nome}</span></p>
+            <p><strong style="color: black;">CPF:</strong> <span class="valor-texto" style="color: black; font-weight: normal;">${cpfBruto}</span></p>
           </div>
 
           ${bloco("Devolução por PDV", metaPdv, realPdv)}
