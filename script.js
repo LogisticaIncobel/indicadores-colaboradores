@@ -82,4 +82,3 @@ function formatarValor(valor) {
   if (isNaN(num)) return "--";
   return num.toFixed(2).replace(".", ",") + "%";
 }
-
