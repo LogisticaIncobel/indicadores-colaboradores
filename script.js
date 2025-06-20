@@ -29,7 +29,7 @@ async function verificarCodigo() {
     const linhas = csv.trim().split("\n").slice(1);
 
     for (let linha of linhas) {
-      const partes = linha.split(";"); // CSV separado por ponto e vírgula
+      const partes = linha.split(";"); // delimitador correto
       const cpf = partes[0]?.replace(/\D/g, "");
       const nome = partes[1]?.trim();
 
@@ -42,6 +42,8 @@ async function verificarCodigo() {
         const realTracking = partes[7];
         const metaDispersao = partes[8];
         const realDispersao = partes[9];
+        const metaRefugo = partes[10];
+        const realRefugo = partes[11];
 
         const bloco = (titulo, meta, real) => `
           <div class="bloco">
@@ -58,6 +60,21 @@ async function verificarCodigo() {
             </div>
           </div>`;
 
+        const blocoKm = (titulo, meta, real) => `
+          <div class="bloco">
+            <div class="titulo-indicador">${titulo}</div>
+            <div class="tabela-bloco">
+              <div class="coluna-bloco">
+                <div class="cabecalho-bloco">Meta</div>
+                <div class="valor-bloco">${meta}</div>
+              </div>
+              <div class="coluna-bloco">
+                <div class="cabecalho-bloco">Real</div>
+                <div class="valor-bloco">${real}</div>
+              </div>
+            </div>
+          </div>`;
+
         document.querySelector(".container").innerHTML = `
           <img src="logo.png" alt="Logo Incobel" class="logo">
           <div class="dados-pessoais">
@@ -67,7 +84,8 @@ async function verificarCodigo() {
           ${bloco("Devolução por PDV", metaPdv, realPdv)}
           ${bloco("Devolução por HECTOLITRO", metaHecto, realHecto)}
           ${bloco("Aderência ao TRACKING", metaTracking, realTracking)}
-          ${bloco("Dispersão de KM", metaDispersao, realDispersao)}
+          ${blocoKm("Dispersão de KM", metaDispersao, realDispersao)}
+          ${bloco("Refugo", metaRefugo, realRefugo)}
         `;
         return;
       }
@@ -79,7 +97,6 @@ async function verificarCodigo() {
   }
 }
 
-// Aplica a máscara automaticamente ao digitar
 document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("codigoInput");
   input.addEventListener("input", () => aplicarMascaraCPF(input));
