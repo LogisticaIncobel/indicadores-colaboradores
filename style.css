@@ -1,76 +1,37 @@
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: linear-gradient(to bottom, #ffffff, #eaf0fb); /* fundo institucional leve */
-  font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.container {
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 600px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+.bloco {
+  margin-top: 25px;
   text-align: center;
-}
-
-.logo {
-  width: 100%;
-  max-width: 260px;
-  margin-bottom: 20px;
-}
-
-input,
-button {
-  width: 100%;
-  padding: 14px;
-  margin: 12px 0;
-  border-radius: 6px;
-  font-size: 16px;
-  display: block;
-}
-
-input {
   border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-button {
-  background: #004aad;
+.titulo {
+  background: #333;
   color: white;
-  border: none;
   font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  padding: 8px;
+  font-size: 15px;
 }
 
-button:hover {
-  background: #00337a;
+.tabela {
+  background: #eaf3ff;
+  width: 100%;
 }
 
-#resultado {
-  margin-top: 20px;
-  font-size: 16px;
+.linha {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-size: 15px;
 }
 
-.painel {
-  background: #f2f8ff;
-  border: 1px solid #cce0ff;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-  text-align: left;
+.cabecalho {
+  background: #c7ddf6;
+  font-weight: bold;
 }
 
-.painel p {
-  font-size: 16px;
-  margin: 8px 0;
+.dados {
+  background: #f5faff;
 }
