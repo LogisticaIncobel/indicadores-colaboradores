@@ -1,4 +1,4 @@
-// Máscara automática enquanto digita
+// Máscara automática de CPF
 document.getElementById("codigoInput").addEventListener("input", function (e) {
   let value = e.target.value.replace(/\D/g, "");
   if (value.length > 11) value = value.slice(0, 11);
@@ -25,21 +25,45 @@ async function verificarCodigo() {
 
     for (let linha of linhas) {
       const partes = linha.split(",");
-      const cpfBruto = partes[0].trim(); // CPF vem na primeira coluna
-      const nome = partes[1]?.trim() || "";
-      const dispersao = partes.slice(2).join(",").trim(); // Junta tudo que sobra
 
-      const cpfLimpo = cpfBruto.replace(/\D/g, ""); // Remove pontos e traços do CSV também
+      const cpfBruto = partes[0]?.trim();
+      const nome = partes[1]?.trim();
+      const metaPdv = parseFloat(partes[2]) || "--";
+      const realPdv = parseFloat(partes[3]) || "--";
+      const metaHecto = parseFloat(partes[4]) || "--";
+      const realHecto = parseFloat(partes[5]) || "--";
+      const metaTracking = partes[6]?.trim() || "--";
+      const realTracking = partes[7]?.trim() || "--";
+      const metaDisp = partes[8]?.trim() || "--";
+      const realDisp = partes[9]?.trim() || "--";
+
+      const cpfLimpo = cpfBruto.replace(/\D/g, "");
 
       if (cpfLimpo === entrada) {
+        const bloco = (titulo, meta, real) => `
+          <div class="bloco">
+            <div class="titulo">${titulo}</div>
+            <div class="tabela">
+              <div class="linha cabecalho">
+                <div>Meta</div>
+                <div>Real</div>
+              </div>
+              <div class="linha dados">
+                <div>${formatarValor(meta)}</div>
+                <div>${formatarValor(real)}</div>
+              </div>
+            </div>
+          </div>`;
+
         container.innerHTML = `
           <img src="logo.png" alt="Logo Incobel" class="logo" style="max-width: 240px; margin-bottom: 20px;">
-          <h2 style="color: #004aad; margin-bottom: 30px;">Bem-vindo, ${nome.split(" ")[0]}!</h2>
-          <div class="painel">
-            <p><strong>CPF:</strong> ${cpfBruto}</p>
-            <p><strong>Nome completo:</strong> ${nome}</p>
-            <p><strong>Dispersão KM:</strong> ${dispersao}</p>
-          </div>
+          <h2 style="color: #004aad; margin-bottom: 10px;"><strong>Nome Completo:</strong> ${nome}</h2>
+          <h3 style="margin-bottom: 20px;"><strong>CPF:</strong> ${cpfBruto}</h3>
+
+          ${bloco("Devolução por PDV", metaPdv, realPdv)}
+          ${bloco("Devolução por HECTOLITRO", metaHecto, realHecto)}
+          ${bloco("Aderência ao TRACKING", metaTracking, realTracking)}
+          ${bloco("Dispersão de KM", metaDisp, realDisp)}
         `;
         return;
       }
@@ -49,4 +73,12 @@ async function verificarCodigo() {
   } catch (error) {
     document.getElementById("resultado").innerHTML = "<p style='color:red'>Erro ao acessar o banco de dados.</p>";
   }
+}
+
+// Formata número como percentual, se aplicável
+function formatarValor(valor) {
+  if (valor === "--") return "--";
+  const num = parseFloat(valor);
+  if (isNaN(num)) return valor;
+  return (num * 100).toFixed(2).replace(".", ",") + "%";
 }
