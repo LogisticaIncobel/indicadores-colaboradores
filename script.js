@@ -41,27 +41,25 @@ async function verificarCodigo() {
       if (cpfLimpo === entrada) {
         const bloco = (titulo, meta, real) => `
           <div class="bloco">
-            <div class="bloco-titulo">${titulo}</div>
-            <table class="bloco-tabela">
-              <thead>
-                <tr>
-                  <th>Meta</th>
-                  <th>Real</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>${formatarValor(meta)}</td>
-                  <td>${formatarValor(real)}</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="titulo-indicador">${titulo}</div>
+            <div class="tabela-bloco">
+              <div class="coluna-bloco">
+                <div class="cabecalho-bloco">Meta</div>
+                <div class="valor-bloco">${formatarValor(meta)}</div>
+              </div>
+              <div class="coluna-bloco">
+                <div class="cabecalho-bloco">Real</div>
+                <div class="valor-bloco">${formatarValor(real)}</div>
+              </div>
+            </div>
           </div>`;
 
         container.innerHTML = `
-          <img src="logo.png" alt="Logo Incobel" class="logo" style="max-width: 200px; margin-bottom: 10px;">
-          <h2 style="color: #004aad;"><strong>Nome Completo:</strong> ${nome}</h2>
-          <h3 style="margin-bottom: 30px;"><strong>CPF:</strong> ${cpfBruto}</h3>
+          <img src="logo.png" alt="Logo Incobel" class="logo" style="max-width: 200px; margin-bottom: 20px;">
+          <div class="dados-pessoais">
+            <p><strong>Nome Completo:</strong> <span class="valor-texto">${nome}</span></p>
+            <p><strong>CPF:</strong> <span class="valor-texto">${cpfBruto}</span></p>
+          </div>
 
           ${bloco("Devolução por PDV", metaPdv, realPdv)}
           ${bloco("Devolução por HECTOLITRO", metaHecto, realHecto)}
