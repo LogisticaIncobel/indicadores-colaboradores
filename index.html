@@ -2,18 +2,116 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Incobel - Área Restrita</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+    .card h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    input[type="text"] {
+      padding: 0.75rem;
+      width: 100%;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    button {
+      padding: 0.75rem;
+      width: 100%;
+      font-size: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="Logo Incobel" class="logo">
-    <h1>Área Restrita</h1>
-    <input type="text" id="codigoInput" placeholder="Digite seu CPF">
-    <button onclick="verificarCodigo()">Entrar</button>
-    <div id="resultado"></div>
+  <div class="card">
+    <h2>Login</h2>
+    <input type="text" id="cpf" placeholder="Digite seu CPF" maxlength="14">
+    <button onclick="fazerLogin()">Avançar</button>
+    <div id="erro" class="error"></div>
   </div>
-  <script src="script.js"></script>
+
+  <script>
+    const cpfsValidos = [
+      "011.938.299-76", "020.586.869-00", "005.275.259-36", "005.159.019-03",
+      "418.560.820-91", "770.495.359-15", "078.861.819-99", "048.381.969-70",
+      "076.397.099-97", "386.597.609-30", "012.345.678-90"
+    ];
+
+    const nomes = {
+      "011.938.299-76": "SAMUEL ALMEIDA DA COSTA",
+      "020.586.869-00": "RICARDO ROSA",
+      "005.275.259-36": "GILMAR DE LIZ LUZ",
+      "005.159.019-03": "ELIAS TELES",
+      "418.560.820-91": "VANDERLEI MARASCHIN",
+      "770.495.359-15": "LUIZ CARLOS RODRIGUES",
+      "078.861.819-99": "LUCIANO LIZ DE SOUZA",
+      "048.381.969-70": "JOÃO PAULO GODOI",
+      "076.397.099-97": "IGOR RIBAS",
+      "386.597.609-30": "HÉLIO ANTUNES CONRADO",
+      "012.345.678-90": "ANALISTA DE LOGÍSTICA"
+    };
+
+    function formatarCPF(cpf) {
+      cpf = cpf.replace(/\D/g, "");
+      cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+      cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+      cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+      return cpf;
+    }
+
+    document.getElementById("cpf").addEventListener("input", function() {
+      this.value = formatarCPF(this.value);
+    });
+
+    function fazerLogin() {
+      const cpf = document.getElementById("cpf").value;
+      const erro = document.getElementById("erro");
+
+      if (cpfsValidos.includes(cpf)) {
+        localStorage.setItem("cpf", cpf);
+        localStorage.setItem("nome", nomes[cpf]);
+        window.location.href = "viagem.html";
+      } else {
+        erro.textContent = "CPF não encontrado. Verifique e tente novamente.";
+      }
+    }
+  </script>
 </body>
 </html>
